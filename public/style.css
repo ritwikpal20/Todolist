@@ -1,0 +1,78 @@
+body {
+    background-image: linear-gradient(
+        to bottom left,
+        rgb(255, 209, 209) 800px,
+        #dc3545 5px
+    );
+    min-height: 100vh;
+}
+.container {
+    margin: auto;
+    max-width: 1200px;
+}
+.divDateTimeContainer {
+    color: white;
+    width: 80%;
+    max-width: 30rem;
+    background-color: #dc3545;
+    padding: 0.5rem;
+    border-radius: 5px;
+    box-shadow: 4px 4px 2px grey;
+    text-align: center;
+    margin: 0.5rem auto;
+}
+.divTodolistContainer {
+    width: 80%;
+    padding: 0.5rem;
+    max-width: 30rem;
+    border-radius: 5px;
+    margin: 3rem auto;
+    box-shadow: 4px 4px 2px grey;
+    background-color: white;
+}
+.divDate {
+    font-family: "Hachi Maru Pop", cursive;
+    font-weight: bolder;
+    font-size: 2rem;
+}
+.divTime {
+    font-family: "Yusei Magic", sans-serif;
+}
+.divTodolistItems {
+    font-size: 1.5rem;
+    font-family: "PT Sans Narrow", sans-serif;
+}
+.divTodolistItem {
+    border-bottom: 1px solid rgb(150, 141, 141);
+}
+input:checked + label {
+    color: grey;
+    text-decoration: line-through;
+}
+.divTodolistItem:last-child {
+    border-bottom: 0px;
+}
+.divTodolistAddNewItem {
+    text-align: center;
+}
+.inpNewItem {
+    width: 60%;
+    border: 0px;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #dc3545;
+    outline: none;
+    margin-right: 2rem;
+    color: grey;
+    text-align: center;
+}
+
+.btnAddNewItem {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: white;
+    background-color: #dc3545;
+    border: none;
+}
