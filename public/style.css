@@ -64,9 +64,11 @@ input:checked + label {
     margin-right: 2rem;
     color: grey;
     text-align: center;
+    margin: auto;
 }
 
 .btnAddNewItem {
+    display: inline-block;
     width: 2rem;
     height: 2rem;
     border-radius: 100%;
@@ -75,4 +77,31 @@ input:checked + label {
     color: white;
     background-color: #dc3545;
     border: none;
+}
+.spanIcon {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+    background-color: #dc3545;
+    position: relative;
+    top: -10px;
+}
+.btnAddNewItem:hover,
+.spanIcon:hover {
+    background-color: rgb(168, 2, 2);
+}
+.iIcon {
+    position: relative;
+    top: 8px;
+}
+.dialog {
+    background-color: rgb(226, 218, 218);
+    color: black;
+    border: 1px solid black;
+    padding: 1px;
+}
+.btnAndIcon {
+    display: inline-block;
+    margin-top: 1rem;
 }
