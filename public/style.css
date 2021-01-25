@@ -43,17 +43,27 @@ body {
     font-family: "PT Sans Narrow", sans-serif;
 }
 .divTodolistItem {
-    border-bottom: 1px solid rgb(150, 141, 141);
+    position: relative;
 }
-input:checked + label {
+input[type="checkbox"] {
+    position: absolute;
+    top: 0;
+}
+input:checked ~ .divLabel {
     color: grey;
     text-decoration: line-through;
 }
-.divTodolistItem:last-child {
+.divTodolistItem:last-child .divLabel {
     border-bottom: 0px;
 }
 .divTodolistAddNewItem {
     text-align: center;
+}
+.divLabel {
+    display: inline-block;
+    width: calc(100% - 30px);
+    margin-left: 30px;
+    border-bottom: 1px solid rgb(150, 141, 141);
 }
 .inpNewItem {
     width: 60%;
@@ -68,14 +78,6 @@ input:checked + label {
 }
 
 .btnAddNewItem {
-    display: inline-block;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 100%;
-    font-size: 1.5rem;
-    font-weight: bolder;
-    color: white;
-    background-color: #dc3545;
     border: none;
 }
 .spanIcon {

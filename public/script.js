@@ -35,7 +35,7 @@ $(".spanIcon").click((event) => {
         let idsToDelete = [];
         itemsToBeDeleted.forEach((e) => {
             id = $(e).attr("id").split("-")[1];
-            idsToDelete.push(Number(id));
+            idsToDelete.push(id);
         });
         $.post("/delete", { idsToDelete }, () => {
             itemsToBeDeleted = itemsToBeDeleted.map((e) => {
@@ -63,10 +63,10 @@ $(".inpNewItem").on("keydown", (e) => {
 });
 
 $(".btnAddNewItem").click((event) => {
+    $(".dialog").remove();
     if ($(".inpNewItem").val() == "") {
         var x = event.clientX; // Get the horizontal coordinate
         var y = event.clientY; // Get the vertical coordinate
-        $(".dialog").remove();
         $(".divTodolistAddNewItem").append("<p>");
         $("p").toggleClass("dialog");
         $(".dialog").css({ top: y, left: x, position: "fixed" });

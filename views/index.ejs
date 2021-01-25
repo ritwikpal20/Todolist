@@ -27,14 +27,23 @@
         <div class="divTodolistContainer">
             <div class="divTodolistItems">
                 <% for(let i = 0 ; i< items.length;i++){ %>
-                    <div class="divTodolistItem"><input type="checkbox" name="item-<%= i %>" id="item-<%= i %>">&nbsp;<label for="item-<%= i %>"> <%= items[i] %> </label></div>
+                    <div class="divTodolistItem">
+                        <input type="checkbox" name="item-<%= items[i]._id %>" id="item-<%= items[i]._id %>">
+                        <div class="divLabel">
+                            <label for="item-<%= items[i]._id %>">
+                                <%= items[i].text %>
+                            </label>
+                        </div>
+                    </div>
                 <% } %> 
             </div>
             <div class="divTodolistAddNewItem">
                 <form action="/" method="post">
                     <input type="text" name="newItem" class="inpNewItem" autocomplete="off"  placeholder="New Item">
                     <div class="btnAndIcon">
-                        <span class="btnAddNewItem">+</span>
+                        <span class="btnAddNewItem spanIcon">
+                            <i class="fas fa-plus fs-3x iIcon" style="color: white;"></i>
+                        </span>
                         <span class="spanIcon">
                             <i class="fas fa-trash fs-3x iIcon" style="color: white;"></i>
                         </span>
