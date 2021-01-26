@@ -1,0 +1,32 @@
+<%- include('header') %>
+<link rel="stylesheet" href="/home.css">
+<h1 id="welcome-msg">
+    Welcome to Todos
+</h1>
+<h2 id="instruction">Create your first list to Get Started</h2>
+
+<!-- Button trigger modal -->
+<button data-bs-toggle="modal" data-bs-target="#exampleModal" id="create-list">
+    Create list
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create your list</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/home" method="post">
+                    <label for="list-name">Enter list name: </label> <input type="text" name="listName" id="list-name">
+                    <button class=" btn btn-start">Start</button>
+                </form>
+            </div>  
+        </div>
+    </div>
+</div>
+
+<script src="/home.js"></script>
+<%- include('footer') %> 

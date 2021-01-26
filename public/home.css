@@ -1,0 +1,54 @@
+body {
+    text-align: center;
+    color: rgb(153, 0, 0);
+    font-family: "Yusei Magic", sans-serif;
+}
+#welcome-msg {
+    margin: 2rem;
+    font-family: "Hachi Maru Pop", cursive;
+    font-weight: bolder;
+    font-size: 4rem;
+}
+
+#instruction {
+    font-family: "Yusei Magic", sans-serif;
+}
+
+#create-list {
+    outline: none;
+    color: rgb(153, 0, 0);
+    display: inline-block;
+    padding: 10px;
+    border: 2px solid;
+    border-radius: 20px;
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 3rem;
+    text-decoration: none;
+    margin-top: 5rem;
+    margin-bottom: 50px;
+}
+#create-list:hover {
+    color: white;
+    background-color: rgb(153, 0, 0);
+}
+
+.btn {
+    outline: none;
+}
+.btn-start {
+    color: white;
+    background-color: rgb(153, 0, 0);
+    border-color: rgb(153, 0, 0);
+    border-radius: 10px;
+}
+.btn-start:hover {
+    color: rgb(90, 0, 0);
+    background-color: white;
+    border-color: rgb(90, 0, 0);
+}
+
+@media (max-width: 500px) {
+    #welcome-msg {
+        font-size: 3rem;
+    }
+}

@@ -1,56 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TodoList</title>
-    <link rel="stylesheet" href="/style.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=PT+Sans+Narrow&family=Yusei+Magic&display=swap"
-        rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script defer src="/script.js"></script>
-    <script src="https://kit.fontawesome.com/ce84c2dd76.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <div class="container">
-        <div class="divDateTimeContainer">
-            <div class="divDate">
-                <%= dmy %>
+<%- include ('header') -%> 
+    <main>
+        <% if(err){ %>
+            <h1 style="text-align: center;"><%= err %> </h1>
+        <% }else{ %>
+            <div class="divDateTimeContainer">
+                <div class="divListName">
+                    <b>
+                        <%= listName %>
+                    </b>
+                </div>
+                <div class="divTime">
+                    <%= dmy %> , <%= time %>
+                </div>
             </div>
-            <div class="divTime">
-                <%= time %>
-            </div>
-        </div>
-        <div class="divTodolistContainer">
-            <div class="divTodolistItems">
-                <% for(let i = 0 ; i< items.length;i++){ %>
-                    <div class="divTodolistItem">
-                        <input type="checkbox" name="item-<%= items[i]._id %>" id="item-<%= items[i]._id %>">
-                        <div class="divLabel">
-                            <label for="item-<%= items[i]._id %>">
-                                <%= items[i].text %>
-                            </label>
+            <div class="divTodolistContainer">
+                <div class="divTodolistItems">
+                    <% for(let i=0 ; i< items.length;i++){ %>
+                        <div class="divTodolistItem">
+                            <input type="checkbox" name="item-<%= items[i]._id %>" id="item-<%= items[i]._id %>">
+                            <div class="divLabel">
+                                <label for="item-<%= items[i]._id %>">
+                                    <%= items[i].text %>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                <% } %> 
+                        <% } %>
+                </div>
+                <div class="divTodolistAddNewItem">
+                    <form action="/index" method="post">
+                        <input type="text" name="newItem" class="inpNewItem" autocomplete="off" placeholder="New Item">
+                        <div class="btnAndIcon">
+                            <span class="btnAddNewItem spanIcon">
+                                <i class="fas fa-plus fs-3x iIcon" style="color: white;"></i>
+                            </span>
+                            <span class="btnDelete spanIcon">
+                                <i class="fas fa-trash fs-3x iIcon" style="color: white;"></i>
+                            </span>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="divTodolistAddNewItem">
-                <form action="/" method="post">
-                    <input type="text" name="newItem" class="inpNewItem" autocomplete="off"  placeholder="New Item">
-                    <div class="btnAndIcon">
-                        <span class="btnAddNewItem spanIcon">
-                            <i class="fas fa-plus fs-3x iIcon" style="color: white;"></i>
-                        </span>
-                        <span class="spanIcon">
-                            <i class="fas fa-trash fs-3x iIcon" style="color: white;"></i>
-                        </span>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+        <% } %>
+    </main>
+<%- include ('footer') -%> 

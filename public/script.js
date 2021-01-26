@@ -21,14 +21,15 @@ setInterval(() => {
     $(".divTime").text(strTime);
 }, 60000);
 
-$(".spanIcon").click((event) => {
+$(".btnDelete").click((event) => {
     if ($("input[type=checkbox]:checked").length <= 0) {
         var x = event.clientX; // Get the horizontal coordinate
         var y = event.clientY; // Get the vertical coordinate
         $(".dialog").remove();
-        $(".divTodolistAddNewItem").append("<p>");
-        $("p").toggleClass("dialog");
-        $(".dialog").css({ top: y, left: x, position: "fixed" });
+        $(".divTodolistAddNewItem").append(
+            "<p class='dialog' data-click='yes'>"
+        );
+        $(".dialog").css({ top: y + "px", left: x + "px", position: "fixed" });
         $(".dialog").text("Please select some items to delete");
     } else {
         let itemsToBeDeleted = [...$("input[type=checkbox]:checked")];
@@ -47,8 +48,30 @@ $(".spanIcon").click((event) => {
         });
     }
 });
-$(".spanIcon").mouseleave(() => {
-    $("p").remove();
+$(".btnAddNewItem").click((event) => {
+    // $(".dialog").remove();
+    if ($(".inpNewItem").val() == "") {
+        var x = event.clientX; // Get the horizontal coordinate
+        var y = event.clientY; // Get the vertical coordinate
+        $(".divTodolistAddNewItem").append(
+            "<p class='dialog' data-click='yes'>"
+        );
+        $(".dialog").css({ top: y + "px", left: x + "px", position: "fixed" });
+        $(".dialog").text("Please write some content");
+    } else {
+        $("form").submit();
+    }
+});
+//the mouseleave event was getting triggered even on mouseclick event . therefore added a data attribute to check when the click event was happening
+$(".btnDelete").on("mouseleave", (event) => {
+    if ($(".dialog").data("click") == "yes") {
+        $(".dialog").data("click", "no");
+    } else $(".dialog").remove();
+});
+$(".btnAddNewItem").on("mouseleave", (event) => {
+    if ($(".dialog").data("click") == "yes") {
+        $(".dialog").data("click", "no");
+    } else $(".dialog").remove();
 });
 
 $(".inpNewItem").on("keydown", (e) => {
@@ -60,21 +83,4 @@ $(".inpNewItem").on("keydown", (e) => {
             return false;
         }
     }
-});
-
-$(".btnAddNewItem").click((event) => {
-    $(".dialog").remove();
-    if ($(".inpNewItem").val() == "") {
-        var x = event.clientX; // Get the horizontal coordinate
-        var y = event.clientY; // Get the vertical coordinate
-        $(".divTodolistAddNewItem").append("<p>");
-        $("p").toggleClass("dialog");
-        $(".dialog").css({ top: y, left: x, position: "fixed" });
-        $(".dialog").text("Please write some content");
-    } else {
-        $("form").submit();
-    }
-});
-$(".btnAddNewItem").mouseleave(() => {
-    $("p").remove();
 });

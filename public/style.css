@@ -6,9 +6,20 @@ body {
     );
     min-height: 100vh;
 }
+nav,
+footer {
+    background-color: rgb(153, 0, 0);
+    font-family: "Yusei Magic", sans-serif;
+}
+nav a,
+footer {
+    color: white;
+}
+
 .container {
     margin: auto;
     max-width: 1200px;
+    min-height: 90vh;
 }
 .divDateTimeContainer {
     color: white;
@@ -30,10 +41,12 @@ body {
     box-shadow: 4px 4px 2px grey;
     background-color: white;
 }
-.divDate {
+.divListName {
+    margin-top: -20px;
+    text-transform: capitalize;
     font-family: "Hachi Maru Pop", cursive;
     font-weight: bolder;
-    font-size: 2rem;
+    font-size: 3rem;
 }
 .divTime {
     font-family: "Yusei Magic", sans-serif;
@@ -49,7 +62,7 @@ input[type="checkbox"] {
     position: absolute;
     top: 0;
 }
-input:checked ~ .divLabel {
+input:checked ~ .divLabel label {
     color: grey;
     text-decoration: line-through;
 }
@@ -95,7 +108,7 @@ input:checked ~ .divLabel {
 }
 .iIcon {
     position: relative;
-    top: 8px;
+    top: 4px;
 }
 .dialog {
     background-color: rgb(226, 218, 218);
@@ -106,4 +119,10 @@ input:checked ~ .divLabel {
 .btnAndIcon {
     display: inline-block;
     margin-top: 1rem;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    min-height: 50px;
 }
