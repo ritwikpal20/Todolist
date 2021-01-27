@@ -10,5 +10,5 @@ app.use("/", express.static(__dirname + "/public"));
 app.use("/home", itemsRoute);
 
 app.listen(7000, () => {
-    console.log("server started on http://localhost:7000");
+    console.log("server started on http://localhost:7000/home");
 });

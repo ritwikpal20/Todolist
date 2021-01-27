@@ -20,7 +20,6 @@ setInterval(() => {
     $(".divDate").text(dmy);
     $(".divTime").text(strTime);
 }, 60000);
-
 $(".btnDelete").click((event) => {
     if ($("input[type=checkbox]:checked").length <= 0) {
         var x = event.clientX; // Get the horizontal coordinate
@@ -38,7 +37,7 @@ $(".btnDelete").click((event) => {
             id = $(e).attr("id").split("-")[1];
             idsToDelete.push(id);
         });
-        $.post("/delete", { idsToDelete }, () => {
+        $.post(`${$(".divListName").html()}/delete`, { idsToDelete }, () => {
             itemsToBeDeleted = itemsToBeDeleted.map((e) => {
                 return $(e).parent();
             });

@@ -1,9 +1,23 @@
 <%- include('header') %>
 <link rel="stylesheet" href="/home.css">
-<h1 id="welcome-msg">
-    Welcome to Todos
-</h1>
-<h2 id="instruction">Create your first list to Get Started</h2>
+<%  if(lists){ %>
+    <h1>Your list</h1>
+    <% lists.forEach((list)=>{ %>
+        <div class="divEach">
+            <a href="<%= "/home/" + list.name %>">
+                <h2>
+                    <%= list.name %>
+                </h2>
+            </a>
+        </div>
+        <% }) %>
+
+<% }else{ %> 
+    <h1 id="welcome-msg">
+        Welcome to Todos
+    </h1>
+    <h2 id="instruction">Create your first list to Get Started</h2>
+<% } %> 
 
 <!-- Button trigger modal -->
 <button data-bs-toggle="modal" data-bs-target="#exampleModal" id="create-list">
@@ -23,10 +37,10 @@
                     <label for="list-name">Enter list name: </label> <input type="text" name="listName" id="list-name">
                     <button class=" btn btn-start">Start</button>
                 </form>
-            </div>  
+            </div>
         </div>
     </div>
 </div>
 
-<script src="/home.js"></script>
+<!-- <script src="/home.js"></script> -->
 <%- include('footer') %> 

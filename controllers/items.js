@@ -1,4 +1,6 @@
+const mongoose = require("mongoose");
 const { Item, List } = require("../db/model");
+const items = require("../routes/items");
 
 async function defaultItem(listId) {
     const getList = await List.findOne({ _id: listId });
@@ -24,19 +26,27 @@ async function defaultItem(listId) {
     }
 }
 
-async function insertNewItem(newItem) {
-    await Item.insertMany(
-        [
-            {
-                text: newItem,
-                dateCreated: new Date(),
-                dateUpdated: new Date(),
-            },
-        ],
-        (err) => {
+async function insertNewItem(listName, newItem) {
+    const getList = await List.findOne({ name: listName });
+    getList.items.push({
+        text: newItem,
+        dateCreated: new Date(),
+        dateUpdated: new Date(),
+    });
+    getList.save();
+}
+
+async function deleteAItem(res, listName, itemIds) {
+    const getList = await List.findOne({ name: listName });
+    List.findOneAndUpdate(
+        { name: listName },
+        { $pull: { items: { _id: { $in: itemIds } } } },
+        { useFindAndModify: false },
+        (err, doc) => {
             if (err) {
-                console.log(null);
+                console.log(err);
             }
+            res.send("success");
         }
     );
 }
@@ -44,4 +54,5 @@ async function insertNewItem(newItem) {
 module.exports = {
     defaultItem,
     insertNewItem,
+    deleteAItem,
 };

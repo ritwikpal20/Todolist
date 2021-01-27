@@ -4,11 +4,7 @@
             <h1 style="text-align: center;"><%= err %> </h1>
         <% }else{ %>
             <div class="divDateTimeContainer">
-                <div class="divListName">
-                    <b>
-                        <%= listName %>
-                    </b>
-                </div>
+                <div class="divListName"><%= listName %></div>
                 <div class="divTime">
                     <%= dmy %> , <%= time %>
                 </div>
@@ -27,7 +23,7 @@
                         <% } %>
                 </div>
                 <div class="divTodolistAddNewItem">
-                    <form action="/index" method="post">
+                    <form action="/home/<%= listName %>" method="post">
                         <input type="text" name="newItem" class="inpNewItem" autocomplete="off" placeholder="New Item">
                         <div class="btnAndIcon">
                             <span class="btnAddNewItem spanIcon">

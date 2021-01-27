@@ -1,16 +1,31 @@
 const { Router } = require("express");
 const { date, time } = require("../utils/dateTime");
-const { defaultItem, insertNewItem } = require("../controllers/items");
+const {
+    defaultItem,
+    insertNewItem,
+    deleteAItem,
+} = require("../controllers/items");
 const { createNewList } = require("../controllers/lists");
-const { List } = require("../db/model");
+const { List, Item } = require("../db/model");
 
 const route = Router();
 
 route.get("/", (req, res) => {
-    res.render("home", { title: "Home" });
+    List.find((err, lists) => {
+        if (err) {
+            console.log(err);
+        } else {
+            if (lists) {
+                res.render("home", { lists: lists, title: "Home" });
+            } else {
+                res.render("home", { lists: "", title: "Home" });
+            }
+        }
+    });
 });
 route.post("/", async (req, res) => {
-    const listName = req.body.listName;
+    let listName = req.body.listName;
+    console.log("list name in /", `${listName}`);
     try {
         const newList = await createNewList(listName);
         res.redirect(`/home/${listName}`);
@@ -45,17 +60,16 @@ route.get("/:list", async (req, res) => {
 
 route.post("/:list", async (req, res) => {
     const listName = req.params.list;
-
-    // const newItem = req.body.newItem;
-    // await insertNewItem(newItem);
-    // res.redirect("/:list");
+    const newItem = req.body.newItem;
+    await insertNewItem(listName, newItem);
+    res.redirect(`/home/${listName}`);
 });
 
-route.post("/delete", async (req, res) => {
+route.post("/:list/delete", async (req, res) => {
+    let listName = req.params.list;
     let idsToDelete = req.body.idsToDelete;
-    idsToDelete = Object(idsToDelete);
-    await Item.deleteMany({ _id: { $in: idsToDelete } });
-    res.redirect("/index");
+    console.log("listName:", `*${listName}*`);
+    await deleteAItem(res, listName, idsToDelete);
 });
 
 module.exports = {
