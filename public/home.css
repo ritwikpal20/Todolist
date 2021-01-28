@@ -47,6 +47,21 @@ body {
     border-color: rgb(90, 0, 0);
 }
 
+.your-list {
+    text-decoration: underline;
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 2rem 0px;
+}
+.divEach {
+    display: inline-block;
+    margin: 1rem;
+    text-align: left;
+}
+.divEach a {
+    text-decoration: none;
+}
+
 @media (max-width: 500px) {
     #welcome-msg {
         font-size: 3rem;

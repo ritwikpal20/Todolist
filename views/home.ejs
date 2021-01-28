@@ -1,14 +1,16 @@
 <%- include('header') %>
 <link rel="stylesheet" href="/home.css">
-<%  if(lists){ %>
-    <h1>Your list</h1>
+<%  if(lists.length!=0){ %>
+    <h1 class="your-list">Your Lists</h1>
     <% lists.forEach((list)=>{ %>
-        <div class="divEach">
-            <a href="<%= "/home/" + list.name %>">
-                <h2>
-                    <%= list.name %>
-                </h2>
-            </a>
+        <div class="card divEach" style="width: 18rem;">
+            <div class="card-body">
+                <h2 class="card-title"><a href="<%= " /home/" + list.name %>"><%= startCase(list.name) %></a></h2>
+                <hr>
+                <p class="card-text"><%= list.description %> </p>
+                <a href="<%= "/home/" + list.name %>" class="card-link">Open List</a>
+                <button class="btn btn-danger btn-sm aDelete"  data-listid="<%= list._id %>">Delete List</button>
+            </div>
         </div>
         <% }) %>
 
@@ -19,6 +21,7 @@
     <h2 id="instruction">Create your first list to Get Started</h2>
 <% } %> 
 
+<br>
 <!-- Button trigger modal -->
 <button data-bs-toggle="modal" data-bs-target="#exampleModal" id="create-list">
     Create list
@@ -35,6 +38,9 @@
             <div class="modal-body">
                 <form action="/home" method="post">
                     <label for="list-name">Enter list name: </label> <input type="text" name="listName" id="list-name">
+                    <br><br>
+                    <label for="list-description">List Description: </label> <input type="text" name="listDescription" id="list-description">
+                    <br><br>
                     <button class=" btn btn-start">Start</button>
                 </form>
             </div>
@@ -42,5 +48,5 @@
     </div>
 </div>
 
-<!-- <script src="/home.js"></script> -->
+<script src="/home.js"></script>
 <%- include('footer') %> 

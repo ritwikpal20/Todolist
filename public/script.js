@@ -17,9 +17,8 @@ setInterval(() => {
     hours = hours ? hours : 12; // the hour '0' should be '12'
     minutes = minutes < 10 ? "0" + minutes : minutes;
     var strTime = hours + ":" + minutes + " " + ampm;
-    $(".divDate").text(dmy);
-    $(".divTime").text(strTime);
-}, 60000);
+    $(".divTime").text(dmy + " , " + strTime);
+}, 6000);
 $(".btnDelete").click((event) => {
     if ($("input[type=checkbox]:checked").length <= 0) {
         var x = event.clientX; // Get the horizontal coordinate
@@ -37,14 +36,18 @@ $(".btnDelete").click((event) => {
             id = $(e).attr("id").split("-")[1];
             idsToDelete.push(id);
         });
-        $.post(`${$(".divListName").html()}/delete`, { idsToDelete }, () => {
-            itemsToBeDeleted = itemsToBeDeleted.map((e) => {
-                return $(e).parent();
-            });
-            itemsToBeDeleted.forEach((e) => {
-                $(e).remove();
-            });
-        });
+        $.post(
+            `${$(".divListName").data("listname")}/delete`,
+            { idsToDelete },
+            () => {
+                itemsToBeDeleted = itemsToBeDeleted.map((e) => {
+                    return $(e).parent();
+                });
+                itemsToBeDeleted.forEach((e) => {
+                    $(e).remove();
+                });
+            }
+        );
     }
 });
 $(".btnAddNewItem").click((event) => {
@@ -58,7 +61,7 @@ $(".btnAddNewItem").click((event) => {
         $(".dialog").css({ top: y + "px", left: x + "px", position: "fixed" });
         $(".dialog").text("Please write some content");
     } else {
-        $("form").submit();
+        $("#formAddItem").submit();
     }
 });
 //the mouseleave event was getting triggered even on mouseclick event . therefore added a data attribute to check when the click event was happening

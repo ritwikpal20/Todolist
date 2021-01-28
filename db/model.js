@@ -28,6 +28,9 @@ const listSchema = mongoose.Schema({
         required: true,
         unique: true,
     },
+    description: {
+        type: String,
+    },
     dateCreated: {
         type: Date,
     },

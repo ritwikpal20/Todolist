@@ -120,6 +120,13 @@ input:checked ~ .divLabel label {
     display: inline-block;
     margin-top: 1rem;
 }
+.err {
+    font-family: "Hachi Maru Pop", cursive;
+    text-align: center;
+    color: rgb(153, 0, 0);
+    margin-top: 3rem;
+    font-weight: bolder;
+}
 
 footer {
     text-align: center;

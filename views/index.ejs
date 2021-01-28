@@ -1,10 +1,11 @@
 <%- include ('header') -%> 
+<link rel="stylesheet" href="/home.css">
     <main>
         <% if(err){ %>
-            <h1 style="text-align: center;"><%= err %> </h1>
+            <h1 class="err"><%= err %> </h1>
         <% }else{ %>
             <div class="divDateTimeContainer">
-                <div class="divListName"><%= listName %></div>
+                <div class="divListName"  data-listname="<%= listName %>"><%= listName %></div>
                 <div class="divTime">
                     <%= dmy %> , <%= time %>
                 </div>
@@ -23,7 +24,7 @@
                         <% } %>
                 </div>
                 <div class="divTodolistAddNewItem">
-                    <form action="/home/<%= listName %>" method="post">
+                    <form action="/home/<%= listName %>" method="post" id="formAddItem">
                         <input type="text" name="newItem" class="inpNewItem" autocomplete="off" placeholder="New Item">
                         <div class="btnAndIcon">
                             <span class="btnAddNewItem spanIcon">
@@ -37,5 +38,27 @@
                 </div>
             </div>
         <% } %>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Create your list</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/home" method="post">
+                            <label for="list-name">Enter list name: </label> <input type="text" name="listName" id="list-name">
+                            <br><br>
+                            <label for="list-description">List Description: </label> <input type="text" name="listDescription"
+                                id="list-description">
+                            <br><br>
+                            <button class=" btn btn-start">Start</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 <%- include ('footer') -%> 
