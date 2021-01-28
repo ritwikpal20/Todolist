@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/testTodolistDB", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-});
+mongoose.connect(
+    `mongodb+srv://ritwikpal20:${process.env.MONGO_PASSWORD}@todos.q04du.mongodb.net/testTodolistDB`,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+    }
+);
 
 const itemSchema = mongoose.Schema({
     text: {

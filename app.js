@@ -1,4 +1,6 @@
 const express = require("express");
+const dotenv = require("dotenv");
+dotenv.config();
 const { itemsRoute } = require("./routes/items");
 
 const app = express();
@@ -9,6 +11,7 @@ app.use("/", express.static(__dirname + "/public"));
 
 app.use("/home", itemsRoute);
 
-app.listen(7000, () => {
-    console.log("server started on http://localhost:7000/home");
+port = process.env.PORT || 7000;
+app.listen(port, () => {
+    console.log(`server started on http://localhost:${port}/home`);
 });
