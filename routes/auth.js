@@ -15,6 +15,7 @@ route.get("/signup", (req, res) => {
             res.render("signup", {
                 title: "Sign Up | Todos",
                 errorsAndPreviousValues,
+                isAuthenticated: false,
             });
         } else {
             res.render("signup", {
@@ -24,6 +25,7 @@ route.get("/signup", (req, res) => {
                     usernameValue: [""],
                     emailValue: [""],
                 },
+                isAuthenticated: false,
             });
         }
     }
@@ -73,7 +75,6 @@ route.get("/signin", (req, res) => {
         res.redirect("/home");
     } else {
         error = req.flash("error");
-        console.log(error);
         if (error == "Incorrect password.") {
             passwordError = "Incorrect password.";
             usernameError = "";
@@ -88,6 +89,7 @@ route.get("/signin", (req, res) => {
             title: "Sign In | Todos",
             passwordError,
             usernameError,
+            isAuthenticated: false,
         });
     }
 });

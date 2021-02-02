@@ -1,52 +1,48 @@
 const { Item, List } = require("../db/model");
 
 async function defaultItem(listId) {
-    const getList = await List.findOne({ _id: listId });
-    if (getList.items.length == 0) {
-        await List.updateOne(
-            { _id: listId },
-            {
-                items: [
-                    {
-                        text: "Welcome to todolist",
-                        dateCreated: new Date(),
-                        dateUpdated: new Date(),
-                    },
-                    {
-                        text:
-                            "To add items click on + button. To delete items select the items and click on delete button",
-                        dateCreated: new Date(),
-                        dateUpdated: new Date(),
-                    },
-                ],
-            }
-        );
-    }
+    items = await Item.create([
+        {
+            text: "Welcome to todolist",
+            dateCreated: new Date(),
+            dateUpdated: new Date(),
+            listId: listId,
+        },
+        {
+            text:
+                "To add items click on + button. To delete items select the items and click on delete button",
+            dateCreated: new Date(),
+            dateUpdated: new Date(),
+            listId: listId,
+        },
+    ]);
 }
 
-async function insertNewItem(listName, newItem) {
-    const getList = await List.findOne({ name: listName });
-    getList.items.push({
+async function insertNewItem(userId, listName, newItem) {
+    const getList = await List.findOne({ name: listName, userId: userId });
+    await Item.create({
         text: newItem,
         dateCreated: new Date(),
         dateUpdated: new Date(),
+        listId: getList._id,
     });
-    getList.save();
 }
 
-async function deleteAItem(res, listName, itemIds) {
-    const getList = await List.findOne({ name: listName });
-    List.findOneAndUpdate(
-        { name: listName },
-        { $pull: { items: { _id: { $in: itemIds } } } },
-        { useFindAndModify: false },
-        (err, doc) => {
-            if (err) {
-                console.log(err);
-            }
-            res.send("success");
-        }
-    );
+async function deleteAItem(res, userId, listName, itemIds) {
+    const getList = await List.findOne({ name: listName, userId: userId });
+    await Item.deleteMany({ listId: getList._id, _id: { $in: itemIds } });
+    res.send("success");
+    // List.findOneAndUpdate(
+    //     { name: listName },
+    //     { $pull: { items: { _id: { $in: itemIds } } } },
+    //     { useFindAndModify: false },
+    //     (err, doc) => {
+    //         if (err) {
+    //             console.log(err);
+    //         }
+    //         res.send("success");
+    //     }
+    // );
 }
 
 module.exports = {

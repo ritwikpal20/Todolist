@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
     if (req.isAuthenticated()) {
         res.redirect("/home");
     } else {
-        res.render("main", { title: "Todos" });
+        res.render("main", { title: "Todos", isAuthenticated: false });
     }
 });
 

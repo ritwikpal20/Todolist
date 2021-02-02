@@ -28,6 +28,9 @@ const itemSchema = mongoose.Schema({
     dateUpdated: {
         type: Date,
     },
+    listId: {
+        type: mongoose.Types.ObjectId,
+    },
 });
 const Item = mongoose.model("Item", itemSchema);
 
@@ -36,7 +39,6 @@ const listSchema = mongoose.Schema({
         type: String,
         max: 50,
         required: true,
-        unique: true,
     },
     description: {
         type: String,
@@ -47,8 +49,8 @@ const listSchema = mongoose.Schema({
     dateUpdated: {
         type: Date,
     },
-    items: {
-        type: [itemSchema],
+    userId: {
+        type: mongoose.Types.ObjectId,
     },
 });
 const List = mongoose.model("List", listSchema);
@@ -62,14 +64,11 @@ const userSchema = mongoose.Schema({
     },
     email: String,
     password: String,
-    lists: {
-        type: [listSchema],
-    },
 });
 const User = mongoose.model("User", userSchema);
 
 module.exports = {
-    Item,
-    List,
     User,
+    List,
+    Item,
 };
