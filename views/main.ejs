@@ -1,0 +1,18 @@
+<%- include('header') %>
+<style>
+    a{
+        text-decoration: none;
+    }
+    .aSignup{
+        font-size: 2rem;
+    }
+</style>
+<link rel="stylesheet" href="/home.css">
+    <h1 id="welcome-msg">
+        Welcome to Todos
+    </h1>
+    <h2 id="instruction">Please Signup for creating your own list</h2>
+    <a href="/auth/signup" class="aSignup">Sign Up</a>
+    <br>
+    <p>Already have an account? <a href="/auth/signin">Sign In</a></p>
+<%- include('footer') %>

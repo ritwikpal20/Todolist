@@ -18,7 +18,7 @@ setInterval(() => {
     minutes = minutes < 10 ? "0" + minutes : minutes;
     var strTime = hours + ":" + minutes + " " + ampm;
     $(".divTime").text(dmy + " , " + strTime);
-}, 6000);
+}, 1000);
 $(".btnDelete").click((event) => {
     if ($("input[type=checkbox]:checked").length <= 0) {
         var x = event.clientX; // Get the horizontal coordinate
@@ -75,6 +75,18 @@ $(".btnAddNewItem").on("mouseleave", (event) => {
         $(".dialog").data("click", "no");
     } else $(".dialog").remove();
 });
+
+//for mobile devices
+document.onpointerdown = (event) => {
+    if ($(".dialog").data("click") == "yes") {
+        $(".dialog").data("click", "no");
+    } else $(".dialog").remove();
+};
+document.onpointerdown = (event) => {
+    if ($(".dialog").data("click") == "yes") {
+        $(".dialog").data("click", "no");
+    } else $(".dialog").remove();
+};
 
 $(".inpNewItem").on("keydown", (e) => {
     if ($(".inpNewItem").val() != "") {

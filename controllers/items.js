@@ -1,6 +1,4 @@
-const mongoose = require("mongoose");
 const { Item, List } = require("../db/model");
-const items = require("../routes/items");
 
 async function defaultItem(listId) {
     const getList = await List.findOne({ _id: listId });
