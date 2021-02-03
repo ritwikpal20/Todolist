@@ -64,6 +64,9 @@ const userSchema = mongoose.Schema({
     },
     email: String,
     password: String,
+    googleId: {
+        type: String,
+    },
 });
 const User = mongoose.model("User", userSchema);
 

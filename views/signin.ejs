@@ -8,11 +8,19 @@
         a {
             text-decoration: none;
         }
-
+        .oauth{
+            background-color: white;;
+            min-height: 5rem;
+            border-radius: 10px;
+        }
+        .google-auth{
+            padding-top: 1.2rem;
+            text-align: center;
+        }
         .signup-container {
             padding: 2rem;
+            border-radius: 10px;
             background-color: lightcoral;
-            width: 70%;
         }
 
         .form-input {
@@ -23,7 +31,7 @@
             width: 90%;
         }
 
-        small {
+        .signup {
             color: black;
         }
         .input-error{
@@ -33,26 +41,41 @@
     <h1 id="welcome-msg">
         Sign In
     </h1>
-    <div class="signup-container">
-        <form action="/auth/signin" method="post">
-            <div class="form-input">
-                <label for="username">Username : </label>
-                <input type="text" name="username" id="username">
-                <br>
-                <small class="input-error">
-                    <%= usernameError %>
-                </small>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="signup-container">
+                <form action="/auth/signin" method="post">
+                    <div class="form-input">
+                        <label for="username">Username : </label>
+                        <input type="text" name="username" id="username">
+                        <br>
+                        <small class="input-error">
+                            <%= usernameError %>
+                        </small>
+                    </div>
+                    <div class="form-input">
+                        <label for="password">Password : </label>
+                        <input type="password" name="password" id="password">
+                        <br>
+                        <small class="input-error">
+                            <%= passwordError %>
+                        </small>
+                    </div>
+                    <button class="btn btn-danger">Sign In</button>
+                </form>
             </div>
-            <div class="form-input">
-                <label for="password">Password : </label>
-                <input type="password" name="password" id="password">
-                <br>
-                <small class="input-error">
-                    <%= passwordError %>
-                </small>
+            <small class="signup"> Need a account? <a href="/auth/signup">Sign Up</a></small>
+        </div>
+        <div class="col-md-4">
+            <div class="oauth">
+                <div class="google-auth">
+                    <a href="/auth/google/" class="btn btn-block btn-social btn-google">
+                        <i class="fab fa-google"></i>
+                        Sign In with Google
+                    </a>
+                </div>
             </div>
-            <button class="btn btn-danger">Sign In</button>
-        </form>
+        </div>
     </div>
-    <small>Need a account? <a href="/auth/signup">Sign Up</a></small>
+    <br><br>
 <%- include('footer') %>
