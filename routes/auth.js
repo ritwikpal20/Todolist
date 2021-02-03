@@ -110,6 +110,21 @@ route.get("/signout", function (req, res) {
         res.redirect("/");
     }
 });
+
+route.get(
+    "/google",
+    passport.authenticate("google", { scope: ["email", "profile"] })
+);
+
+route.get(
+    "/google/todos",
+    passport.authenticate("google", { failureRedirect: "/auth/signin" }),
+    function (req, res) {
+        // Successful authentication, redirect home.
+        res.redirect("/home");
+    }
+);
+
 module.exports = {
     authRoute: route,
 };

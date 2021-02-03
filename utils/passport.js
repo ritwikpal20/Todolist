@@ -1,11 +1,12 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const googleStrategy = require("./passportGoogle");
 const { User } = require("../db/model");
 const bcrypt = require("bcrypt");
 
 passport.use(
     new LocalStrategy(function (username, password, done) {
-        User.findOne({ username: username }, async function (err, user) {
+        User.findOne({ username: username.trim() }, async function (err, user) {
             if (err) {
                 return done(err);
             }
@@ -30,6 +31,9 @@ passport.use(
         });
     })
 );
+
+passport.use(googleStrategy);
+
 passport.serializeUser(function (user, done) {
     done(null, user.id);
 });
