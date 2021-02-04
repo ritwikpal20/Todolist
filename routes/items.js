@@ -5,6 +5,7 @@ const { insertNewItem, deleteAItem } = require("../controllers/items");
 const { createNewList, deleteAList } = require("../controllers/lists");
 const { List, Item } = require("../db/model");
 const passport = require("../utils/passport");
+var CryptoJS = require("crypto-js");
 
 const route = Router();
 
@@ -69,6 +70,14 @@ route.get("/:list", async (req, res) => {
         });
         if (getList) {
             let getItems = await Item.find({ listId: getList._id });
+            getItems.map((item) => {
+                var bytes = CryptoJS.AES.decrypt(
+                    item.text,
+                    process.env.CRYPTOJS_SECRET
+                );
+                item.text = bytes.toString(CryptoJS.enc.Utf8);
+                return;
+            });
             res.render("index", {
                 dmy: date(),
                 time: time(),
@@ -95,7 +104,10 @@ route.get("/:list", async (req, res) => {
 route.post("/:list", async (req, res) => {
     if (req.isAuthenticated()) {
         const listName = _.kebabCase(req.params.list);
-        const newItem = req.body.newItem;
+        const newItem = CryptoJS.AES.encrypt(
+            req.body.newItem,
+            process.env.CRYPTOJS_SECRET
+        ).toString();
         await insertNewItem(req.user._id, listName, newItem);
         res.redirect(`/home/${listName}`);
     } else {

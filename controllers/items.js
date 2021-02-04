@@ -1,16 +1,22 @@
 const { Item, List } = require("../db/model");
+var CryptoJS = require("crypto-js");
 
 async function defaultItem(listId) {
     items = await Item.create([
         {
-            text: "Welcome to todolist",
+            text: CryptoJS.AES.encrypt(
+                "Welcome to todolist",
+                process.env.CRYPTOJS_SECRET
+            ).toString(),
             dateCreated: new Date(),
             dateUpdated: new Date(),
             listId: listId,
         },
         {
-            text:
+            text: CryptoJS.AES.encrypt(
                 "To add items click on + button. To delete items select the items and click on delete button",
+                process.env.CRYPTOJS_SECRET
+            ).toString(),
             dateCreated: new Date(),
             dateUpdated: new Date(),
             listId: listId,

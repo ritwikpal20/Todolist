@@ -3,7 +3,9 @@
 ## Organise your items under various lists :
 
 -   Lets you add➕ and delete❌ various items in your categorised lists
--   Delete the whole list in one go, when all the items are completed
+-   Delete the whole list in one go, when all the items are completed.
+
+### Note : All your todos are encrypted before storing to database and are decrypted only when you view them on website using your credentials.
 
 ## Development Sights :
 
@@ -31,4 +33,4 @@ GOOGLE_CLIENT_SECRET = *your_googleclient_secret*
 
 ### Live link at:
 
-[Todos](https://todos-by-ritwik.herokuapp.com/)
+[Todos](https://todos.sairyonodevs.in/)
