@@ -1,9 +1,12 @@
-# Todos
+# [Todos](https://todos.sairyonodevs.in/)
 
 ## Organise your items under various lists :
 
 -   Lets you add➕ and delete❌ various items in your categorised lists
 -   Delete the whole list in one go, when all the items are completed.
+-   _Strikes items out or change order of your list items , everything will be preserved_
+
+Strike out by simply touching and Change order by touching and draging
 
 ### Note : All your todos are encrypted before storing to database and are decrypted only when you view them on website using your credentials.
 
@@ -23,6 +26,7 @@ SALT_ROUNDS = *salt_rounds_for_bcrypt*
 GOOGLE_CLIENT_ID = *your_google_client_id*
 GOOGLE_CLIENT_SECRET = *your_googleclient_secret*
 
+CRYPTOJS_SECRET = *"your_cryptojs_secret_here"*
 ```
 
 ## Here are some screenshots of how the website can be used :

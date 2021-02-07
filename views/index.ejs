@@ -13,13 +13,22 @@
             <div class="divTodolistContainer">
                 <div class="divTodolistItems">
                     <% for(let i=0 ; i< items.length;i++){ %>
-                        <div class="divTodolistItem">
-                            <input type="checkbox" name="item-<%= items[i]._id %>" id="item-<%= items[i]._id %>">
-                            <div class="divLabel">
-                                <label for="item-<%= items[i]._id %>">
-                                    <%= items[i].text %>
-                                </label>
-                            </div>
+                        <div class="divTodolistItem" class="item-<%= items[i]._id %>" id="serialize-<%= items[i]._id %> "> 
+                            <% if (items[i].checked == true){ %>
+                                <input type="checkbox"  name="item-<%= items[i]._id %>" id="item-<%= items[i]._id %>" checked>
+                                <div class="divLabel">
+                                    <label class="checked" for="item-<%= items[i]._id %>">
+                                        <%= items[i].text %>
+                                    </label>
+                                </div>
+                            <% }else{ %>
+                                <input type="checkbox" name="item-<%= items[i]._id %>" id="item-<%= items[i]._id %>">
+                                <div class="divLabel">
+                                    <label for="item-<%= items[i]._id %>">
+                                        <%= items[i].text %>
+                                    </label>
+                                </div>
+                            <% } %> 
                         </div>
                         <% } %>
                 </div>

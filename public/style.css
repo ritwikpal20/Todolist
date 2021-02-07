@@ -62,7 +62,7 @@ input[type="checkbox"] {
     position: absolute;
     top: 0;
 }
-input:checked ~ .divLabel label {
+.checked {
     color: grey;
     text-decoration: line-through;
 }
@@ -132,4 +132,9 @@ footer {
     text-align: center;
     padding: 20px;
     min-height: 50px;
+}
+
+.ui-sortable {
+    position: relative;
+    overflow: hidden;
 }

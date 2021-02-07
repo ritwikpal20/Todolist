@@ -31,6 +31,10 @@ const itemSchema = mongoose.Schema({
     listId: {
         type: mongoose.Types.ObjectId,
     },
+    checked: {
+        type: Boolean,
+        default: false,
+    },
 });
 const Item = mongoose.model("Item", itemSchema);
 
@@ -51,6 +55,9 @@ const listSchema = mongoose.Schema({
     },
     userId: {
         type: mongoose.Types.ObjectId,
+    },
+    itemsOrder: {
+        type: [String],
     },
 });
 const List = mongoose.model("List", listSchema);

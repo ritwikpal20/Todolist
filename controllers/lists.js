@@ -8,10 +8,10 @@ async function createNewList(res, userId, listName, listDescription) {
             userId: userId,
             dateCreated: new Date(),
             dateUpdated: new Date(),
+            itemsOrder: [],
         });
-        list.save();
-        await defaultItem(list._id);
-        res.redirect(`/home/${listName}`);
+        await list.save();
+        await defaultItem(res, list._id);
     } catch (e) {
         console.log(e);
     }

@@ -6,6 +6,7 @@ const { createNewList, deleteAList } = require("../controllers/lists");
 const { List, Item } = require("../db/model");
 const passport = require("../utils/passport");
 var CryptoJS = require("crypto-js");
+const mongoose = require("mongoose");
 
 const route = Router();
 
@@ -69,8 +70,15 @@ route.get("/:list", async (req, res) => {
             userId: req.user._id,
         });
         if (getList) {
-            let getItems = await Item.find({ listId: getList._id });
-            getItems.map((item) => {
+            let getItemsUnordered = await Item.find({ listId: getList._id });
+            let getItemsOrdered = [];
+            for (let i = 0; i < getList.itemsOrder.length; i++) {
+                for (let j = 0; j < getItemsUnordered.length; j++) {
+                    if (getList.itemsOrder[i] == getItemsUnordered[j]._id)
+                        getItemsOrdered.push(getItemsUnordered[j]);
+                }
+            }
+            getItemsOrdered.map((item) => {
                 var bytes = CryptoJS.AES.decrypt(
                     item.text,
                     process.env.CRYPTOJS_SECRET
@@ -81,7 +89,7 @@ route.get("/:list", async (req, res) => {
             res.render("index", {
                 dmy: date(),
                 time: time(),
-                items: getItems,
+                items: getItemsOrdered,
                 listName: _.startCase(listName),
                 title: _.startCase(listName) + " | Todos",
                 err: "",
@@ -108,8 +116,7 @@ route.post("/:list", async (req, res) => {
             req.body.newItem,
             process.env.CRYPTOJS_SECRET
         ).toString();
-        await insertNewItem(req.user._id, listName, newItem);
-        res.redirect(`/home/${listName}`);
+        await insertNewItem(res, req.user._id, listName, newItem);
     } else {
         res.redirect("/auth/signin");
     }
@@ -120,6 +127,64 @@ route.post("/:list/delete", async (req, res) => {
         let listName = _.kebabCase(req.params.list);
         let idsToDelete = req.body.idsToDelete;
         await deleteAItem(res, req.user._id, listName, idsToDelete);
+    } else {
+        res.redirect("/auth/signin");
+    }
+});
+
+route.post("/:list/check", async (req, res) => {
+    if (req.isAuthenticated()) {
+        let idToCheck = req.body.idToBeChecked;
+        await Item.updateOne({ _id: idToCheck }, { checked: true }, (err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("Checked");
+            }
+        });
+    } else {
+        res.redirect("/auth/signin");
+    }
+});
+
+route.post("/:list/uncheck", async (req, res) => {
+    if (req.isAuthenticated()) {
+        let idToUncheck = req.body.idToBeChecked;
+        await Item.updateOne(
+            { _id: idToUncheck },
+            { checked: false },
+            (err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.send("Unchecked");
+                }
+            }
+        );
+    } else {
+        res.redirect("/auth/signin");
+    }
+});
+
+route.post("/item/sort", async (req, res) => {
+    if (req.isAuthenticated()) {
+        data = String(req.body.data);
+        order = data.split("=").join(" ").split(" ");
+        itemsOrder = [];
+        for (let i = 1; i < order.length; i = i + 2) {
+            itemsOrder.push(order[i]);
+        }
+        await List.updateOne(
+            { name: _.kebabCase(req.body.listName), userId: req.user._id },
+            { itemsOrder: itemsOrder },
+            (err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.send("Order set");
+                }
+            }
+        );
     } else {
         res.redirect("/auth/signin");
     }

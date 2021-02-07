@@ -98,3 +98,40 @@ $(".inpNewItem").on("keydown", (e) => {
         }
     }
 });
+
+$(".divTodolistItem input").click((event) => {
+    let itemToBeChecked = $(event.target);
+    let idArray = [...itemToBeChecked.attr("id")];
+    let idToBeChecked = idArray.slice(5, idArray.length).join("");
+    if (itemToBeChecked.is(":checked")) {
+        $.post(
+            `${$(".divListName").data("listname")}/check`,
+            { idToBeChecked },
+            () => {
+                $(itemToBeChecked.next().children()).addClass("checked");
+            }
+        );
+    } else {
+        $.post(
+            `${$(".divListName").data("listname")}/uncheck`,
+            { idToBeChecked },
+            () => {
+                $(itemToBeChecked.next().children()).removeClass("checked");
+            }
+        );
+    }
+});
+
+//change item position using mouse
+$(".divTodolistItems").sortable({
+    axis: "y",
+    update: function (event, ui) {
+        var data = $(this).sortable("serialize");
+
+        $.post(
+            "/home/item/sort",
+            { data, listName: `${$(".divListName").data("listname")}` },
+            (data) => {}
+        );
+    },
+});
