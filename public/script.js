@@ -135,3 +135,51 @@ $(".divTodolistItems").sortable({
         );
     },
 });
+
+//sort list using up down buttons
+$(".upBtn").click((event) => {
+    current = $(event.target).parent().parent().parent();
+    if (current.prev()[0]) {
+        prev = current.prev();
+        prev.before(current);
+
+        data = [];
+        items = [...$(".divTodolistItem")];
+        items.forEach((elem) => {
+            data.push($(elem).attr("id"));
+        });
+        data = data.map((elem) => {
+            return elem.replace("-", "[]=");
+        });
+        data = data.join("&");
+
+        $.post(
+            "/home/item/sort",
+            { data, listName: `${$(".divListName").data("listname")}` },
+            (data) => {}
+        );
+    }
+});
+$(".downBtn").click((event) => {
+    current = $(event.target).parent().parent().parent();
+    if (current.next()[0]) {
+        next = current.next();
+        next.after(current);
+
+        data = [];
+        items = [...$(".divTodolistItem")];
+        items.forEach((elem) => {
+            data.push($(elem).attr("id"));
+        });
+        data = data.map((elem) => {
+            return elem.replace("-", "[]=");
+        });
+        data = data.join("&");
+
+        $.post(
+            "/home/item/sort",
+            { data, listName: `${$(".divListName").data("listname")}` },
+            (data) => {}
+        );
+    }
+});

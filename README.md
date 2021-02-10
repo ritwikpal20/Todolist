@@ -6,7 +6,7 @@
 -   Delete the whole list in one go, when all the items are completed.
 -   _Strikes items out or change order of your list items , everything will be preserved_
 
-Strike out by simply touching and Change order by touching and draging
+Strike out by simply touching and Change order by clicking and draging. In touchscreen , use up & down arrows for changing order.
 
 ### Note : All your todos are encrypted before storing to database and are decrypted only when you view them on website using your credentials.
 
