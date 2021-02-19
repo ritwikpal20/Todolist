@@ -14,19 +14,26 @@ passport.use(
                 return done(null, false, { message: "Incorrect username." });
             }
             if (user) {
-                await bcrypt.compare(
-                    password,
-                    user.password,
-                    function (err, result) {
-                        if (result == false) {
-                            return done(null, false, {
-                                message: "Incorrect password.",
-                            });
-                        } else {
-                            return done(null, user);
+                if (user.password) {
+                    await bcrypt.compare(
+                        password,
+                        user.password,
+                        function (err, result) {
+                            if (result == false) {
+                                return done(null, false, {
+                                    message: "Incorrect password.",
+                                });
+                            } else {
+                                return done(null, user);
+                            }
                         }
-                    }
-                );
+                    );
+                } else {
+                    return done(null, false, {
+                        message:
+                            "You SignedUp using Google Account.Please signin in using that.",
+                    });
+                }
             }
         });
     })

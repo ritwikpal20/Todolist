@@ -81,6 +81,13 @@ route.get("/signin", (req, res) => {
         } else if (error == "Incorrect username.") {
             usernameError = "Incorrect username.";
             passwordError = "";
+        } else if (
+            error ==
+            "You SignedUp using Google Account.Please signin in using that."
+        ) {
+            usernameError =
+                "You SignedUp using Google Account.Please signin in using that.";
+            passwordError = "";
         } else {
             usernameError = "";
             passwordError = "";

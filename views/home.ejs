@@ -9,11 +9,23 @@
                 <hr>
                 <p class="card-text"><%= list.description %> </p>
                 <a href="<%= "/home/" + list.name %>" class="card-link">Open List</a>
-                <button class="btn btn-danger btn-sm aDelete"  data-listid="<%= list._id %>">Delete List</button>
+                <button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger btn-sm aDelete"  data-listid="<%= list._id %>">Delete List</button>
             </div>
         </div>
         <% }) %>
-
+    
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>Are you sure to delete?</p>
+                        <button class="btn btn-danger yesDelete" data-bs-dismiss="modal">Yes</button>
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 <% }else{ %> 
     <h1 id="welcome-msg">
         Excited?
