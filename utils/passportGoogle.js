@@ -4,7 +4,7 @@ const { User } = require("../db/model");
 if (process.env.NODE_ENV == "development") {
     callbackURL = "http://localhost:7000/auth/google/todos";
 } else {
-    callbackURL = "https://todos-by-ritwik.herokuapp.com/auth/google/todos";
+    callbackURL = "https://todos-sdy6.onrender.com/auth/google/todos";
 }
 
 module.exports = new GoogleStrategy(
