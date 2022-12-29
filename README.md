@@ -1,4 +1,4 @@
-# [Todos](https://todos-by-ritwik.herokuapp.com/)
+# [Todos](https://todos-sdy6.onrender.com/)
 
 ## Organise your items under various lists :
 
@@ -37,4 +37,4 @@ CRYPTOJS_SECRET = *"your_cryptojs_secret_here"*
 
 ### Live link at:
 
-[Todos](https://todos.sairyonodevs.in/)
+[Todos](https://todos-sdy6.onrender.com/)
